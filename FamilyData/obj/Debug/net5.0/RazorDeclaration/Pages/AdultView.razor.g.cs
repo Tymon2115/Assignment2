@@ -82,6 +82,20 @@ using FamilyData.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 2 "C:\Users\tymon\RiderProjects\Assignment1\FamilyData\Pages\AdultView.razor"
+using Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\tymon\RiderProjects\Assignment1\FamilyData\Pages\AdultView.razor"
+using Data;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/AdultView")]
     public partial class AdultView : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -90,6 +104,15 @@ using FamilyData.Shared;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 7 "C:\Users\tymon\RiderProjects\Assignment1\FamilyData\Pages\AdultView.razor"
+       
+    List<Adult> Adults;
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAdultService AdultService { get; set; }
     }
 }
 #pragma warning restore 1591
