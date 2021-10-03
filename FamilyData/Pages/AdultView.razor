@@ -15,12 +15,45 @@ else if (!Adults.Any()) {
         <em>No adults found</em>
     </p>
 }
+else {
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Hair Color</th>
+            <th scope="col">Eye Color</th>
+            <th scope="col">Age</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Height</th>
+            <th scope="col">Sex</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var adult in Adults) {
+            <tr>
+                <td>@adult.Id</td>
+                <td>@adult.FirstName</td>
+                <td>@adult.LastName</td>
+                <td>@adult.HairColor</td>
+                <td>@adult.EyeColor</td>
+                <td>@adult.Age</td>
+                <td>@adult.Weight</td>
+                <td>@adult.Height</td>
+                <td>@adult.Sex</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
 
 @code {
-    List<Adult> Adults;
+    private List<Adult> Adults;
 
     protected override async Task OnInitializedAsync() {
-        //weird thing happens here, why do i have to cast it
+    //weird thing happens here, why do i have to cast it
         Adults = (List<Adult>) AdultService.Adults;
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FileData;
 using Models;
 
@@ -9,7 +10,7 @@ namespace FamilyData.Data {
 
         public AdultService() {
             FileContext fileContext = new FileContext();
-            Adults = new List<Adult>(fileContext.Adults);
+            Adults = fileContext.Adults;
         }
 
 
