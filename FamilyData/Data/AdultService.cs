@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FileData;
 using Models;
 
@@ -27,7 +28,7 @@ namespace FamilyData.Data {
         }
 
         public Adult Get(int id) {
-            throw new System.NotImplementedException();
+            return Adults.First((adult => adult.Id == id));
         }
     }
 }
