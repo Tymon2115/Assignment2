@@ -1,0 +1,21 @@
+﻿@page "/EditAdult/{Id:int}"
+@using Models
+@using FamilyData.Data
+
+@inject IAdultService adultService;
+@inject NavigationManager navigationManager;
+<h3>EditAdultView</h3>
+<h3>You are edditing info about @adultToEdit.FirstName @adultToEdit.LastName</h3>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private Adult adultToEdit;
+
+    protected override async Task OnInitializedAsync() {
+        adultToEdit = adultService.Get(Id);
+    }
+
+}

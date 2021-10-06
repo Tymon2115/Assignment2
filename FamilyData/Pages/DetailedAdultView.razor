@@ -1,7 +1,7 @@
 ﻿@page "/DetailedAdultView/{Id:int}"
 @using Models
 @using FamilyData.Data
-@inject IAdultService AdultService
+@inject IAdultService adultService
 @inject NavigationManager navigationManager
 
 <div class="card border-info mb-3">
@@ -29,7 +29,7 @@
                     <th scope="row">@adultToView.Id</th>
                     <td>@adultToView.FirstName</td>
                     <td>@adultToView.LastName</td>
-                    <td>@adultToView.JobTitle</td>
+                    <td>@adultToView.JobTitle.JobTitle</td>
                     <td>@adultToView.HairColor</td>
                     <td>@adultToView.EyeColor</td>
                     <td>@adultToView.Age</td>
@@ -41,6 +41,8 @@
             </table>
         </div>
         <button class="btn btn-outline-primary" @onclick="@(() => Back())">Back</button>
+        @* TODO make this only for logged users *@
+        <button class="btn btn-outline-primary" style="float:right" @onclick="@(() => Edit(adultToView.Id))">Edit</button>
     </div>
 </div>
 
@@ -53,11 +55,15 @@
     private Adult adultToView;
 
     protected override async Task OnInitializedAsync() {
-        adultToView = AdultService.Get(Id);
+        adultToView = adultService.Get(Id);
     }
 
     private void Back() {
         navigationManager.NavigateTo("/AdultView");
+    }
+
+    private void Edit(int id) {
+        navigationManager.NavigateTo($"/EditAdult/{Id}");
     }
 
 }

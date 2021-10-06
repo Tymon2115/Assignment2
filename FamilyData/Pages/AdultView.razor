@@ -5,7 +5,8 @@
 @inject IAdultService AdultService
 @inject NavigationManager navigationManager
 <h3>AdultView</h3>
-
+@* TODO make this only for logged users *@
+<button class="btn btn-primary" id ="addButton" @onclick="@(() => AddAdult())">Add new adult</button>
 @if (Adults == null) {
     <p>
         <em>Loading...</em>
@@ -24,6 +25,7 @@ else {
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">View</th>
+            @* TODO add col for admin to delete adults *@
         </tr>
         </thead>
         <tbody>
@@ -53,6 +55,10 @@ else {
 
     private void DetailedView(int adultId) {
         navigationManager.NavigateTo($"DetailedAdultView/{adultId}");
+    }
+
+    private void AddAdult() {
+        navigationManager.NavigateTo($"AddAdult");
     }
 
 }
