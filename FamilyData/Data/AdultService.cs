@@ -8,19 +8,24 @@ using Models;
 namespace FamilyData.Data {
     public class AdultService : IAdultService {
         public IList<Adult> Adults { get; private set; }
+        private FileContext fileContext;
 
         public AdultService() {
-            FileContext fileContext = new FileContext();
+            fileContext = new FileContext();
             Adults = fileContext.Adults;
         }
 
 
         public void AddAdult(Adult adult) {
-            throw new System.NotImplementedException();
+            int max = Adults.Max(adult1 => adult1.Id);
+            adult.Id = (++max);
+            fileContext.Adults.Add(adult);
+            fileContext.SaveChanges();
         }
 
         public void RemoveAdult(int id) {
-            throw new System.NotImplementedException();
+            fileContext.Adults.Remove(Get(id));
+            fileContext.SaveChanges();
         }
 
         public void EditAdult(Adult adult) {

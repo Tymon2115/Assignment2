@@ -1,18 +1,29 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Models {
-public class Person {
-    
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string HairColor { get; set; }
-    public string EyeColor { get; set; }
-    public int Age { get; set; }
-    public float Weight { get; set; }
-    public int Height { get; set; }
-    public string Sex { get; set; }
-}
+    public class Person {
+        public int Id { get; set; }
 
+        [Required]
+        [StringLength(10, ErrorMessage = "Name is too long.")]
+        public string FirstName { get; set; }
 
+        [Required]
+        [StringLength(10, ErrorMessage = "Name is too long.")]
+        public string LastName { get; set; }
+
+        [Required] public string HairColor { get; set; }
+        [Required] public string EyeColor { get; set; }
+
+        [Range(0, 120, ErrorMessage = "Please enter the correct age")]
+        public int Age { get; set; }
+
+        [Range(40, 350, ErrorMessage = "Please enter the correct weight")]
+        public float Weight { get; set; }
+
+        [Range(70, 250, ErrorMessage = "Please enter the correct height")]
+        public int Height { get; set; }
+
+        [Required] public string Sex { get; set; }
+    }
 }
