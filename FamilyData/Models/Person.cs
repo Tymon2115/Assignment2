@@ -9,7 +9,7 @@ namespace Models {
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(10, ErrorMessage = "Name is too long.")]
+        [StringLength(20, ErrorMessage = "Name is too long.")]
         public string LastName { get; set; }
 
         [Required] public string HairColor { get; set; }
