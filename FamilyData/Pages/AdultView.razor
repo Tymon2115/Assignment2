@@ -5,19 +5,32 @@
 @inject IAdultService AdultService
 @inject NavigationManager navigationManager
 <h3>AdultView</h3>
+
+<div class="input-group rounded">
+    <input type="search" aria-hidden="True" class="form-control" placeholder="Search name or surname" @oninput="@((arg) => FilterAdults(arg))">
+    <span class="input-group-text border-0" id="search-addon">
+        <i class="oi oi-magnifying-glass"></i>
+    </span>
+</div>
+
+
 @* TODO make this only for logged users *@
 <button class="btn btn-primary" id="addButton" @onclick="@(() => AddAdult())">Add new adult</button>
-@if (Adults == null) {
+
+@* <label for="filter" class="form-check-label"></label> *@
+@* <input type="text" class = "form-control" @bind-></input> *@
+
+@if (adults == null){
     <p>
         <em>Loading...</em>
     </p>
 }
-else if (!Adults.Any()) {
+else if (!adults.Any()){
     <p>
         <em>No adults found</em>
     </p>
 }
-else {
+else{
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -29,7 +42,7 @@ else {
         </tr>
         </thead>
         <tbody>
-        @foreach (var adult in Adults) {
+        @foreach (var adult in adultsToShow){
             <tr>
                 <td>@adult.Id</td>
                 <td>@adult.FirstName</td>
@@ -51,23 +64,44 @@ else {
 }
 
 @code {
-    private List<Adult> Adults;
+    private List<Adult> adults;
+    private List<Adult> adultsToShow;
 
-    protected override async Task OnInitializedAsync() {
+    protected override async Task OnInitializedAsync(){
     //weird thing happens here, why do i have to cast it
-        Adults = (List<Adult>) AdultService.Adults;
+        adults = (List<Adult>) AdultService.Adults;
+        adultsToShow = adults;
     }
 
-    private void DetailedView(int adultId) {
+    private void DetailedView(int adultId){
         navigationManager.NavigateTo($"DetailedAdultView/{adultId}");
     }
 
-    private void AddAdult() {
+    private void AddAdult(){
         navigationManager.NavigateTo($"AddAdult");
     }
 
-    private void DeleteAdult(int id) {
+    private void DeleteAdult(int id){
         AdultService.RemoveAdult(id);
     }
+
+    private void FilterAdults(ChangeEventArgs changeEventArgs){
+        string filterByName = null;
+        try{
+            filterByName = changeEventArgs.Value.ToString();
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+            throw;
+        }
+        if (filterByName != null){
+            adultsToShow = adults.Where(adult => adult.FirstName.Contains(filterByName) || adult.LastName.Contains(filterByName)).ToList();
+        }
+        else{
+            adultsToShow = adults;
+        }
+    }
+
+    
 
 }

@@ -193,50 +193,5 @@
     "Weight": 54.4,
     "Height": 166,
     "Sex": "M"
-  },
-  {
-    "JobTitle": {
-      "JobTitle": "Science Teacher",
-      "Salary": 55346
-    },
-    "Id": 13,
-    "FirstName": "Arley",
-    "LastName": "Vaughn",
-    "HairColor": "Black",
-    "EyeColor": "Brown",
-    "Age": 33,
-    "Weight": 55.4,
-    "Height": 171,
-    "Sex": "M"
-  },
-  {
-    "JobTitle": {
-      "JobTitle": "Call Center Agent",
-      "Salary": 20308
-    },
-    "Id": 14,
-    "FirstName": "Isiah",
-    "LastName": "Esparza",
-    "HairColor": "Brown",
-    "EyeColor": "Brown",
-    "Age": 44,
-    "Weight": 81.8,
-    "Height": 172,
-    "Sex": "M"
-  },
-  {
-    "JobTitle": {
-      "JobTitle": "Software Developer",
-      "Salary": 20000
-    },
-    "Id": 15,
-    "FirstName": "John",
-    "LastName": "Castiglioni",
-    "HairColor": "black",
-    "EyeColor": "blue",
-    "Age": 20,
-    "Weight": 92,
-    "Height": 199,
-    "Sex": "Male"
   }
 ]

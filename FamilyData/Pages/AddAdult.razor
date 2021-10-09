@@ -6,6 +6,8 @@
 
 <h3>AddAdult</h3>
 
+
+
 <form id="addAdultForm">
     <hr/>
     <EditForm Model="@newAdult" OnValidSubmit="@AddNewAdult">
@@ -90,7 +92,8 @@
     private Job newJob = new();
 
 
-    private void AddNewAdult() {
+    private void AddNewAdult()
+    {
         newAdult.JobTitle = newJob;
         adultService.AddAdult(newAdult);
         navigationManager.NavigateTo("/AdultView");
