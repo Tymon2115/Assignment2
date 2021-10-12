@@ -41,8 +41,9 @@
             </table>
         </div>
         <button class="btn btn-outline-primary" @onclick="@(() => Back())">Back</button>
-        @* TODO make this only for logged users *@
+        <AuthorizeView Policy="MustBeAdmin">
         <button class="btn btn-outline-primary" style="float:right" @onclick="@(() => Edit(adultToView.Id))">Edit</button>
+        </AuthorizeView>
     </div>
 </div>
 

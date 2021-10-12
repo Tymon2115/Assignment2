@@ -13,6 +13,11 @@ namespace FamilyData.Data{
                     UserName = "admin",
                     Password = "admin",
                     Role = "admin"
+                },
+                new User{
+                    UserName = "user",
+                    Password = "user",
+                    Role = "user"
                 }
             }.ToList();
         }

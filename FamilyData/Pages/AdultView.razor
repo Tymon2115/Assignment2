@@ -14,9 +14,9 @@
 </div>
 
 
-@* TODO make this only for logged users *@
-<button class="btn btn-primary" id="addButton" @onclick="@(() => AddAdult())">Add new adult</button>
-
+<AuthorizeView>
+    <button class="btn btn-primary" id="addButton" @onclick="@(() => AddAdult())">Add new adult</button>
+</AuthorizeView>
 @* <label for="filter" class="form-check-label"></label> *@
 @* <input type="text" class = "form-control" @bind-></input> *@
 
@@ -38,7 +38,9 @@ else{
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">View</th>
-            <th scope="col">Delete</th>
+            <AuthorizeView Policy="MustBeAdmin">
+                <th scope="col">Delete</th>
+            </AuthorizeView>
         </tr>
         </thead>
         <tbody>
@@ -52,11 +54,13 @@ else{
                         <i class="oi oi-eye" style="color: #1b6ec2"></i>
                     </button>
                 </td>
-                <td>
-                    <button @onclick="@(() => DeleteAdult(adult.Id))">
-                        <i class="oi oi-delete" style="color: red"></i>
-                    </button>
-                </td>
+                <AuthorizeView Policy="MustBeAdmin">
+                    <td>
+                        <button @onclick="@(() => DeleteAdult(adult.Id))">
+                            <i class="oi oi-delete" style="color: red"></i>
+                        </button>
+                    </td>
+                </AuthorizeView>
             </tr>
         }
         </tbody>
@@ -102,6 +106,6 @@ else{
         }
     }
 
-    
+
 
 }
