@@ -34,8 +34,8 @@ namespace FamilyData {
 
             services.AddAuthorization(options => {
                 options.AddPolicy("MustBeLoggedIn",
-                    a => a.RequireAuthenticatedUser().RequireClaim("Role", "User", "Admin"));
-                options.AddPolicy("MustBeAdmin", a => a.RequireAuthenticatedUser().RequireClaim("Role", "Admin"));
+                    a => a.RequireAuthenticatedUser().RequireClaim("Role", "user", "admin"));
+                options.AddPolicy("MustBeAdmin", a => a.RequireAuthenticatedUser().RequireClaim("Role", "admin"));
             });
         }
 
