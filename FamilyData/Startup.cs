@@ -28,7 +28,7 @@ namespace FamilyData {
         public void ConfigureServices(IServiceCollection services) {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<IAdultService, AdultService>();
+            services.AddSingleton<IAdultService, CloudAdultService>();
             services.AddScoped<IUserService, InMemoryUserService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 

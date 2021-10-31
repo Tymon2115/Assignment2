@@ -20,17 +20,17 @@
 @* <label for="filter" class="form-check-label"></label> *@
 @* <input type="text" class = "form-control" @bind-></input> *@
 
-@if (adults == null){
+@if (adults == null) {
     <p>
         <em>Loading...</em>
     </p>
 }
-else if (!adults.Any()){
+else if (!adults.Any()) {
     <p>
         <em>No adults found</em>
     </p>
 }
-else{
+else {
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -44,7 +44,7 @@ else{
         </tr>
         </thead>
         <tbody>
-        @foreach (var adult in adultsToShow){
+        @foreach (var adult in adultsToShow) {
             <tr>
                 <td>@adult.Id</td>
                 <td>@adult.FirstName</td>
@@ -71,37 +71,41 @@ else{
     private List<Adult> adults;
     private List<Adult> adultsToShow;
 
-    protected override async Task OnInitializedAsync(){
-    //weird thing happens here, why do i have to cast it
-        adults = (List<Adult>) AdultService.Adults;
-        adultsToShow = adults;
+    protected override async Task OnInitializedAsync() {
+        try {
+            Console.WriteLine("getting adults from view");
+            adults = (List<Adult>) await AdultService.GetAdults();
+            adultsToShow = adults;
+        }
+        catch (Exception e) {
+        }
     }
 
-    private void DetailedView(int adultId){
+    private void DetailedView(int adultId) {
         navigationManager.NavigateTo($"DetailedAdultView/{adultId}");
     }
 
-    private void AddAdult(){
+    private void AddAdult() {
         navigationManager.NavigateTo($"AddAdult");
     }
 
-    private void DeleteAdult(int id){
+    private void DeleteAdult(int id) {
         AdultService.RemoveAdult(id);
     }
 
-    private void FilterAdults(ChangeEventArgs changeEventArgs){
+    private void FilterAdults(ChangeEventArgs changeEventArgs) {
         string filterByName = null;
-        try{
+        try {
             filterByName = changeEventArgs.Value.ToString();
         }
-        catch (Exception e){
+        catch (Exception e) {
             Console.WriteLine(e);
             throw;
         }
-        if (filterByName != null){
+        if (filterByName != null) {
             adultsToShow = adults.Where(adult => adult.FirstName.Contains(filterByName) || adult.LastName.Contains(filterByName)).ToList();
         }
-        else{
+        else {
             adultsToShow = adults;
         }
     }
