@@ -1,7 +1,9 @@
-﻿namespace Models{
-    public class User{
-        public string UserName{ get; set; }
-        public string Password{ get; set; }
-        public string Role{ get; set; }
+﻿using System.Text.Json.Serialization;
+
+namespace Models {
+    public class User {
+        [JsonPropertyName("UserName")] public string UserName { get; set; }
+        [JsonPropertyName("Password")] public string Password { get; set; }
+        [JsonPropertyName("Role")] public string Role { get; set; }
     }
 }

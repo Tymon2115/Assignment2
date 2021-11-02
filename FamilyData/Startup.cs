@@ -29,7 +29,7 @@ namespace FamilyData {
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IAdultService, CloudAdultService>();
-            services.AddScoped<IUserService, InMemoryUserService>();
+            services.AddScoped<IUserService, UserWebService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
             services.AddAuthorization(options => {

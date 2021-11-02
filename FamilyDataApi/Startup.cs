@@ -28,6 +28,7 @@ namespace AdultDataAPI {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "FamilyDataApi", Version = "v1"});
             });
             services.AddScoped<IAdultService, AdultService>();
+            services.AddScoped<IUserService, InMemoryUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +37,6 @@ namespace AdultDataAPI {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FamilyDataApi v1"));
-                
             }
 
             app.UseHttpsRedirection();

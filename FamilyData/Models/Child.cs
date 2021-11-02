@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FamilyData.Models;
 
 namespace Models {
 public class Child : Person {

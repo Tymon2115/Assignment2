@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using FamilyData.Models;
 
 namespace Models {
 public class Family {

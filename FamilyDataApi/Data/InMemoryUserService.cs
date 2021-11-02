@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AdultDataAPI.Models;
 
 namespace AdultDataAPI.Data{
@@ -23,7 +24,7 @@ namespace AdultDataAPI.Data{
         }
 
 
-        public User ValidateUser(string userName, string password){
+        public async Task<User> ValidateUser(string userName, string password){
             User first = users.FirstOrDefault(user => user.UserName.Equals(userName));
             if (first == null){
                 throw new Exception("User not found");

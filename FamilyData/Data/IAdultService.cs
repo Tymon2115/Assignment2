@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using FamilyData.Models;
 using Models;
 
 namespace FamilyData.Data {
@@ -8,6 +9,6 @@ namespace FamilyData.Data {
         Task AddAdult(Adult adult);
         Task RemoveAdult(int id);
         Task EditAdult(Adult adult);
-        Adult Get(int id);
+        Task<Adult> Get(int id);
     }
 }

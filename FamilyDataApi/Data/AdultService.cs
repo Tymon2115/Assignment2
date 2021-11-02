@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -29,7 +30,9 @@ namespace AdultDataAPI.Data {
         }
 
         public async Task RemoveAdult(int id) {
+            Console.WriteLine($"removing adult with id {id}");
             fileContext.Adults.Remove(Adults.FirstOrDefault(adult => adult.Id == id));
+            Console.WriteLine("removed adult with id  " + id);
             fileContext.SaveChanges();
         }
 

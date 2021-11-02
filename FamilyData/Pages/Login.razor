@@ -27,10 +27,16 @@
     private string password;
     private string errorMessage;
 
+    protected override async Task OnInitializedAsync() {
+        username = "";
+        password = "";
+        errorMessage = "";
+    }
+
     public async Task PerformLogin(){
         errorMessage = "";
         try{
-            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
+           await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
             username = "";
             password = "";
             NavigationManager.NavigateTo("/");

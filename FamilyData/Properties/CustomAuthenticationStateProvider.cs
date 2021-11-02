@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -36,23 +37,26 @@ namespace FamilyData.Properties{
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
 
-        public void ValidateLogin(string username, string password){
+        public async Task ValidateLogin(string username, string password){
             Console.WriteLine("Validating log in");
             if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
             if (string.IsNullOrEmpty(password)) throw new Exception("Enter password");
             ClaimsIdentity identity = new ClaimsIdentity();
-            try{
-                User user = userService.ValidateUser(username, password);
+            try
+            {
+                User user = await userService.ValidateUser(username, password);
                 identity = SetupClaimsForUser(user);
                 string serialisedData = JsonSerializer.Serialize(user);
                 jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);
                 cachedUser = user;
             }
-            catch (Exception e){
-                throw e;
+            catch (Exception e)
+            {
+                throw new AuthenticationException(e.Message);
             }
 
-            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
+            NotifyAuthenticationStateChanged(
+                Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));
         }
 
         public void Logout(){

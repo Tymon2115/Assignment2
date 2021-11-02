@@ -15,7 +15,7 @@
     private Adult adultToEdit;
 
     protected override async Task OnInitializedAsync() {
-        adultToEdit = adultService.Get(Id);
+        adultToEdit = await adultService.Get(Id);
     }
 
 }

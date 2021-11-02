@@ -4,49 +4,56 @@
 @inject IAdultService adultService
 @inject NavigationManager navigationManager
 
-<div class="card border-info mb-3">
-    <h5 class="card-header">Detailed adult <view></view></h5>
-    <div class="card-body text-info">
-        <h5 class="card-title">You are viewing details about @adultToView.FirstName @adultToView.LastName</h5>
-        <div class="table-wrap">
-            <table class="table">
-                <thead class="thead-primary">
-                <tr class="table-primary">
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Job</th>
-                    <th>HairColor</th>
-                    <th>EyeColor</th>
-                    <th>Age</th>
-                    <th>Weight</th>
-                    <th>Height</th>
-                    <th>Sex</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="table-primary">
-                    <th scope="row">@adultToView.Id</th>
-                    <td>@adultToView.FirstName</td>
-                    <td>@adultToView.LastName</td>
-                    <td>@adultToView.JobTitle.JobTitle</td>
-                    <td>@adultToView.HairColor</td>
-                    <td>@adultToView.EyeColor</td>
-                    <td>@adultToView.Age</td>
-                    <td>@adultToView.Weight</td>
-                    <td>@adultToView.Height</td>
-                    <td>@adultToView.Sex</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <button class="btn btn-outline-primary" @onclick="@(() => Back())">Back</button>
-        <AuthorizeView Policy="MustBeAdmin">
-        <button class="btn btn-outline-primary" style="float:right" @onclick="@(() => Edit(adultToView.Id))">Edit</button>
-        </AuthorizeView>
-    </div>
-</div>
 
+@if (adultToView == null) {
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else {
+    <div class="card border-info mb-3">
+        <h5 class="card-header">Detailed adult <view></view></h5>
+        <div class="card-body text-info">
+            <h5 class="card-title">You are viewing details about @adultToView.FirstName @adultToView.LastName</h5>
+            <div class="table-wrap">
+                <table class="table">
+                    <thead class="thead-primary">
+                    <tr class="table-primary">
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Job</th>
+                        <th>HairColor</th>
+                        <th>EyeColor</th>
+                        <th>Age</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                        <th>Sex</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="table-primary">
+                        <th scope="row">@adultToView.Id</th>
+                        <td>@adultToView.FirstName</td>
+                        <td>@adultToView.LastName</td>
+                        <td>@adultToView.JobTitle.JobTitle</td>
+                        <td>@adultToView.HairColor</td>
+                        <td>@adultToView.EyeColor</td>
+                        <td>@adultToView.Age</td>
+                        <td>@adultToView.Weight</td>
+                        <td>@adultToView.Height</td>
+                        <td>@adultToView.Sex</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-outline-primary" @onclick="@(() => Back())">Back</button>
+            <AuthorizeView Policy="MustBeAdmin">
+                <button class="btn btn-outline-primary" style="float:right" @onclick="@(() => Edit(adultToView.Id))">Edit</button>
+            </AuthorizeView>
+        </div>
+    </div>
+}
 
 @code {
 
@@ -56,7 +63,13 @@
     private Adult adultToView;
 
     protected override async Task OnInitializedAsync() {
-        adultToView = adultService.Get(Id);
+        try {
+            adultToView = await adultService.Get(Id);
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private void Back() {

@@ -1,7 +1,8 @@
-﻿using AdultDataAPI.Models;
+﻿using System.Threading.Tasks;
+using AdultDataAPI.Models;
 
 namespace AdultDataAPI.Data{
     public interface IUserService{
-        User ValidateUser(string userName, string password);
+        Task<User> ValidateUser(string userName, string password);
     }
 }

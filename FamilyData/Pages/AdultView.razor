@@ -82,6 +82,7 @@ else {
     }
 
     private void DetailedView(int adultId) {
+        Console.WriteLine(adultId);
         navigationManager.NavigateTo($"DetailedAdultView/{adultId}");
     }
 
@@ -91,6 +92,7 @@ else {
 
     private void DeleteAdult(int id) {
         AdultService.RemoveAdult(id);
+        adults.Remove(adults.Where(adult => adult.Id == id).FirstOrDefault());
     }
 
     private void FilterAdults(ChangeEventArgs changeEventArgs) {

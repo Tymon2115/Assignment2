@@ -35,10 +35,24 @@ namespace AdultDataAPI.Controllers {
             }
         }
 
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<Adult>> GetAdult([FromRoute] int id) {
+            try {
+                Adult adult = await adultService.Get(id);
+                return Ok(adult);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<ActionResult> DeleteAdult([FromQuery] int id) {
+        public async Task<ActionResult> DeleteAdult([FromRoute] int id) {
             try {
+                Console.WriteLine("asking to remove adult with id" + id);
                 await adultService.RemoveAdult(id);
                 return Ok();
             }
@@ -48,9 +62,10 @@ namespace AdultDataAPI.Controllers {
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<ActionResult> AddAdult([FromBody] Adult adult) {
             try {
+                Console.WriteLine("httppost");
                 await adultService.AddAdult(adult);
                 return Ok();
             }
