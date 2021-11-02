@@ -5,14 +5,14 @@ using AdultDataAPI.Models;
 
 namespace AdultDataAPI.Persistence {
     public class FileContext {
-        public IList<Family> Families { get; private set; }
+        
         public IList<Adult> Adults { get; private set; }
 
         private readonly string familiesFile = "families.json";
         private readonly string adultsFile = "adults.json";
 
         public FileContext() {
-            Families = File.Exists(familiesFile) ? ReadData<Family>(familiesFile) : new List<Family>();
+           
             Adults = File.Exists(adultsFile) ? ReadData<Adult>(adultsFile) : new List<Adult>();
         }
 
@@ -23,15 +23,7 @@ namespace AdultDataAPI.Persistence {
         }
 
         public void SaveChanges() {
-            // storing families
-            // string jsonFamilies = JsonSerializer.Serialize(Families, new JsonSerializerOptions {
-            //     WriteIndented = true
-            // });
-            // using (StreamWriter outputFile = new StreamWriter(familiesFile, false)) {
-            //     outputFile.Write(jsonFamilies);
-            // }
-
-            // storing persons
+            
             string jsonAdults = JsonSerializer.Serialize(Adults, new JsonSerializerOptions {
                 WriteIndented = true
             });
